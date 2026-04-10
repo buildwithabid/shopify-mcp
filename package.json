@@ -1,5 +1,5 @@
 {
-  "name": "@abidali/shopify-mcp-server",
+  "name": "@buildwithabid/shopify-mcp-server",
   "version": "1.0.0",
   "description": "MCP server for Shopify Admin API - search orders, check inventory, lookup customers, and get sales summaries",
   "main": "dist/index.js",

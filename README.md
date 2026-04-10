@@ -1,6 +1,6 @@
 # Shopify MCP Server
 
-[![npm version](https://img.shields.io/npm/v/@abidali/shopify-mcp-server)](https://www.npmjs.com/package/@abidali/shopify-mcp-server)
+[![npm version](https://img.shields.io/npm/v/@buildwithabid/shopify-mcp-server)](https://www.npmjs.com/package/@buildwithabid/shopify-mcp-server)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 An MCP (Model Context Protocol) server that connects Claude to your Shopify store via the Admin REST API. Provides read-only tools for searching orders, checking inventory, looking up customers, and generating sales summaries.
@@ -23,7 +23,7 @@ An MCP (Model Context Protocol) server that connects Claude to your Shopify stor
 ### 1. Install
 
 ```bash
-npm install -g @abidali/shopify-mcp-server
+npm install -g @buildwithabid/shopify-mcp-server
 ```
 
 Or clone locally:
