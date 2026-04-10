@@ -1,0 +1,31 @@
+{
+  "name": "@abidali/shopify-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for Shopify Admin API - search orders, check inventory, lookup customers, and get sales summaries",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "shopify-mcp-server": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts"
+  },
+  "keywords": ["mcp", "shopify", "model-context-protocol", "claude"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "express": "^5.1.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.3",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}
