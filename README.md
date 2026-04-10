@@ -36,17 +36,27 @@ npm install && npm run build
 
 ### 2. Configure
 
-Create a [Shopify custom app](https://help.shopify.com/en/manual/apps/app-types/custom-apps) with these Admin API scopes:
+Create a custom app at [dev.shopify.com](https://dev.shopify.com) with these Admin API scopes:
 
 - `read_orders`
 - `read_products`
 - `read_customers`
 
-Set your environment variables:
+**For apps created after Jan 2026** (Dev Dashboard — tokens auto-refresh every 24h):
 
 ```bash
-export SHOPIFY_ACCESS_TOKEN=shpat_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 export SHOPIFY_STORE_URL=https://your-store.myshopify.com
+export SHOPIFY_CLIENT_ID=your_client_id
+export SHOPIFY_CLIENT_SECRET=your_client_secret
+```
+
+Get your `client_id` and `client_secret` from Dev Dashboard → your app → Settings → Client credentials. The server handles token generation and refresh automatically.
+
+**For legacy apps** (static token):
+
+```bash
+export SHOPIFY_STORE_URL=https://your-store.myshopify.com
+export SHOPIFY_ACCESS_TOKEN=shpat_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 ### 3. Run
