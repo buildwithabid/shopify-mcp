@@ -63,13 +63,25 @@ export SHOPIFY_ACCESS_TOKEN=shpat_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ```bash
 shopify-mcp-server
-# Server starts at http://localhost:3000/mcp
+# Listens on http://127.0.0.1:3000/mcp - this machine only
+```
+
+The server holds your Shopify Admin token, so by default it only accepts requests from the same machine
+(it binds to `127.0.0.1` and checks the `Host`/`Origin` headers). To reach it from another machine or a container,
+set a token and the bind address; it refuses to start on a non-local address without one:
+
+```bash
+export MCP_AUTH_TOKEN=$(openssl rand -hex 32)   # clients send: Authorization: Bearer <token>
+export HOST=0.0.0.0
+shopify-mcp-server
 ```
 
 ### 4. Add to Claude Code
 
 ```bash
 claude mcp add shopify-mcp --transport http http://localhost:3000/mcp
+# remote / Docker (with MCP_AUTH_TOKEN set on the server):
+claude mcp add shopify-mcp --transport http http://your-host:3000/mcp --header "Authorization: Bearer $MCP_AUTH_TOKEN"
 ```
 
 Then ask Claude things like:
@@ -86,11 +98,22 @@ Then ask Claude things like:
 
 ```bash
 docker build -t shopify-mcp .
-docker run -p 3000:3000 \
+docker run -p 127.0.0.1:3000:3000 \
+  -e MCP_AUTH_TOKEN=$(openssl rand -hex 32) \
   -e SHOPIFY_ACCESS_TOKEN=shpat_xxx \
   -e SHOPIFY_STORE_URL=https://your-store.myshopify.com \
   shopify-mcp
 ```
+
+## Security
+
+**1.1.1 (October 2026):** versions up to 1.1.0 listened on all network interfaces with no authentication on `/mcp`,
+so anyone who could reach the port could call the tools with the server's Shopify token. 1.1.1 binds to `127.0.0.1`
+by default, requires `MCP_AUTH_TOKEN` for any other bind address, and rejects non-local `Host`/`Origin` headers in
+local mode. **Upgrade with `npm i -g @buildwithabid/shopify-mcp-server@latest`.** Thanks to 0xwaidwerk
+(Christian Terorde) for the private report.
+
+Report security issues privately to support@bizfilo.com.
 
 ## Development
 
